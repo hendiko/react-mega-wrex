@@ -1,0 +1,32 @@
+{
+  "name": "react-medux",
+  "version": "0.1.0",
+  "description": "Multiple stores in React function component.",
+  "main": "index.jsx",
+  "module": "src/index.jsx",
+  "files": [
+    "/src"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hendiko/react-medux.git"
+  },
+  "keywords": [
+    "react",
+    "hook",
+    "redux",
+    "medux"
+  ],
+  "author": "Xavier Yin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hendiko/react-medux/issues"
+  },
+  "homepage": "https://github.com/hendiko/react-medux#readme",
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}
