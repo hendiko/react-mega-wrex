@@ -1,13 +1,15 @@
 {
   "name": "react-medux",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Multiple stores in React function component.",
-  "main": "index.jsx",
+  "main": "dist/index.jsx",
   "module": "src/index.jsx",
   "files": [
-    "/src"
+    "src",
+    "dist"
   ],
   "scripts": {
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext js,jsx,ts,tsx",
     "lint:fix": "eslint . --ext js,jsx,ts,tsx --fix"
