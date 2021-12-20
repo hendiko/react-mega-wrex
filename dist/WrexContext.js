@@ -19,15 +19,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useMeduxContext = void 0;
+exports.useWrexContext = void 0;
 /*
  * @Author: Xavier Yin
  * @Date: 2021-10-23 03:27:26
  */
-var react_1 = __importStar(require("react"));
-// As default context for medux
-var MeduxContext = react_1.default.createContext({});
+const react_1 = __importStar(require("react"));
+// As default context for wrex
+const WrexContext = react_1.default.createContext({});
 // A shortcut for calling useContext
-var useMeduxContext = function (Context) { return (0, react_1.useContext)(Context || MeduxContext); };
-exports.useMeduxContext = useMeduxContext;
-exports.default = MeduxContext;
+const useWrexContext = (Context) => (0, react_1.useContext)(Context || WrexContext);
+exports.useWrexContext = useWrexContext;
+exports.default = WrexContext;

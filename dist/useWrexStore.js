@@ -20,10 +20,12 @@ const initLoadingReducerState = (names) => names.reduce((state, name) => {
  * The hook being similar to useReducer which is provided by React can be
  * multiple and independent stores that manage states for react components.
  */
-function useMeduxStore(reducers, initialState, init) {
+function useWrexStore(reducers, initialState, init) {
     const [[storeReducers, storeInitialState, storeInit]] = (0, react_1.useState)([
         Object.assign({}, reducers),
-        ((0, utils_1.isPlainObject)(initialState) ? initialState : {}),
+        ((0, utils_1.isPlainObject)(initialState)
+            ? initialState
+            : {}),
         init,
     ]);
     // 备份初始化状态值
@@ -109,7 +111,7 @@ function useMeduxStore(reducers, initialState, init) {
             count: counterRef.current[storeReduceName],
         });
     }, [loadingDispatch]);
-    // 处理 MeduxAction，调用指定的 reducer 函数（如果存在的话），更新 store state
+    // 处理 WrexAction，调用指定的 reducer 函数（如果存在的话），更新 store state
     const handleAction = (0, react_1.useCallback)((action) => {
         const { type } = action;
         const reducer = storeReducers === null || storeReducers === void 0 ? void 0 : storeReducers[type];
@@ -142,8 +144,8 @@ function useMeduxStore(reducers, initialState, init) {
         }
     }, [storeReducers, updateLoadingState, operations]);
     const dispatch = (0, react_1.useMemo)(() => {
-        // 只有 action 为 Plain Object 或者 String 的时候，才会触发 handleAction 函数进行 MeduxState 的状态更新检查
-        // 当 action 为 Promise 或函数时，递归调用 MeduxDispatch 来接收 Promise 的 settled 值或函数返回值。
+        // 只有 action 为 Plain Object 或者 String 的时候，才会触发 handleAction 函数进行 WrexState 的状态更新检查
+        // 当 action 为 Promise 或函数时，递归调用 WrexDispatch 来接收 Promise 的 settled 值或函数返回值。
         const fn = ((action, payload, ...args) => {
             // 传入 action 为对象时，直接触发 dispatch
             if ((0, utils_1.isPlainObject)(action))
@@ -174,7 +176,7 @@ function useMeduxStore(reducers, initialState, init) {
         // 不要将 reducer 名称命名为 getState, getStates, setState，否则会被以下默认方法覆盖。
         // 虽然你仍然可以通过 dispatch({type: 'getState'}) 这种方式来调用你的 reducer，但请尽量避免这种理解混乱。
         // 获取 store state 值的方法
-        // 获取完整的 MeduxState 值，或者按路径取 MeduxState 的子属性值。
+        // 获取完整的 WrexState 值，或者按路径取 WrexState 的子属性值。
         // 如果指定的路径不存在，则返回 defaultValue 作为默认值。
         fn.getState = (namePath, defaultValue) => {
             const { current: storeState } = storeStateRef;
@@ -203,4 +205,4 @@ function useMeduxStore(reducers, initialState, init) {
     }), [dispatch, loadingState, operations, storeState]);
     return [store];
 }
-exports.default = useMeduxStore;
+exports.default = useWrexStore;

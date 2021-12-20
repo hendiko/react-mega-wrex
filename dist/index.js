@@ -22,18 +22,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.withMedux = exports.useMeduxStore = exports.useMeduxContext = exports.createMedux = exports.connect = exports.MeduxContext = exports.Medux = void 0;
+exports.withMegaWrex = exports.useWrexStore = exports.useWrexContext = exports.createMegaWrex = exports.connect = exports.WrexContext = exports.MegaWrex = void 0;
 /*
  * @Author: Xavier Yin
  * @Date: 2021-11-24 09:19:15
  */
-const Medux_1 = __importStar(require("./Medux"));
-exports.Medux = Medux_1.default;
-Object.defineProperty(exports, "connect", { enumerable: true, get: function () { return Medux_1.connect; } });
-Object.defineProperty(exports, "createMedux", { enumerable: true, get: function () { return Medux_1.createMedux; } });
-Object.defineProperty(exports, "withMedux", { enumerable: true, get: function () { return Medux_1.withMedux; } });
-const MeduxContext_1 = __importStar(require("./MeduxContext"));
-exports.MeduxContext = MeduxContext_1.default;
-Object.defineProperty(exports, "useMeduxContext", { enumerable: true, get: function () { return MeduxContext_1.useMeduxContext; } });
-const useMeduxStore_1 = __importDefault(require("./useMeduxStore"));
-exports.useMeduxStore = useMeduxStore_1.default;
+const Wrex_1 = __importStar(require("./Wrex"));
+exports.MegaWrex = Wrex_1.default;
+Object.defineProperty(exports, "connect", { enumerable: true, get: function () { return Wrex_1.connect; } });
+Object.defineProperty(exports, "createMegaWrex", { enumerable: true, get: function () { return Wrex_1.createMegaWrex; } });
+Object.defineProperty(exports, "withMegaWrex", { enumerable: true, get: function () { return Wrex_1.withMegaWrex; } });
+const WrexContext_1 = __importStar(require("./WrexContext"));
+exports.WrexContext = WrexContext_1.default;
+Object.defineProperty(exports, "useWrexContext", { enumerable: true, get: function () { return WrexContext_1.useWrexContext; } });
+const useWrexStore_1 = __importDefault(require("./useWrexStore"));
+exports.useWrexStore = useWrexStore_1.default;

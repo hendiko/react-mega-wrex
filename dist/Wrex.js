@@ -22,15 +22,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.withMedux = exports.createMedux = exports.connect = void 0;
+exports.withMegaWrex = exports.createMegaWrex = exports.connect = void 0;
 /*
  * @Author: Xavier Yin
  * @Date: 2021-11-24 11:27:23
  */
 const react_1 = __importStar(require("react"));
-const MeduxContext_1 = __importStar(require("./MeduxContext"));
+const WrexContext_1 = __importStar(require("./WrexContext"));
 const utils_1 = require("./utils");
-const useMeduxStore_1 = __importDefault(require("./useMeduxStore"));
+const useWrexStore_1 = __importDefault(require("./useWrexStore"));
 // 转换 connect 的参数为统一格式
 const transformConnectMappingArg = (obj) => {
     if ((0, utils_1.isPlainObject)(obj))
@@ -50,12 +50,13 @@ const transformConnectMappingArg = (obj) => {
 };
 // 作为 props 必须是一个 Plain Object
 const validateProps = (obj) => ((0, utils_1.isPlainObject)(obj) ? obj : {});
-const Medux = react_1.default.memo((props) => {
-    const { store, context = MeduxContext_1.default, children } = props;
-    return react_1.default.createElement(context.Provider, { value: store }, children);
+const MegaWrex = react_1.default.memo((props) => {
+    const [defaultStore] = (0, useWrexStore_1.default)();
+    const { store, context = WrexContext_1.default, children } = props;
+    return (react_1.default.createElement(context.Provider, { value: store || defaultStore }, children));
 });
-Medux.displayName = 'Medux';
-// 连接到 Medux 上下文
+MegaWrex.displayName = 'MegaWrex';
+// 连接到 Wrex 上下文
 const connect = (mapStateToProps, mapDispatchToProps, mapLoadingToProps, options) => {
     // 支持 map 参数是字符串、字符串数组、对象、函数
     mapStateToProps = transformConnectMappingArg(mapStateToProps);
@@ -65,7 +66,7 @@ const connect = (mapStateToProps, mapDispatchToProps, mapLoadingToProps, options
         const MemoedComp = react_1.default.memo(Comp);
         return react_1.default.memo((props) => {
             const { context } = options || {};
-            const { state, dispatch, loading } = (0, MeduxContext_1.useMeduxContext)(context) || {};
+            const { state, dispatch, loading } = (0, WrexContext_1.useWrexContext)(context) || {};
             const propsFromState = (0, react_1.useMemo)(() => {
                 if ((0, utils_1.isFunction)(mapStateToProps)) {
                     return validateProps(mapStateToProps(state, props, {
@@ -113,26 +114,26 @@ const connect = (mapStateToProps, mapDispatchToProps, mapLoadingToProps, options
     };
 };
 exports.connect = connect;
-// 创建一个提供了 Medux Store 上下文的高阶函数
-const createMedux = (reducers, initialState, init, options) => (Comp) => react_1.default.memo((props) => {
-    const { context = MeduxContext_1.default } = options || {};
-    const [store] = (0, useMeduxStore_1.default)(reducers, initialState, init);
-    return (react_1.default.createElement(Medux, { store: store, context: context },
+// 创建一个提供了 Wrex Store 上下文的高阶函数
+const createMegaWrex = (reducers, initialState, init, options) => (Comp) => react_1.default.memo((props) => {
+    const { context = WrexContext_1.default } = options || {};
+    const [store] = (0, useWrexStore_1.default)(reducers, initialState, init);
+    return (react_1.default.createElement(MegaWrex, { store: store, context: context },
         react_1.default.createElement(Comp, Object.assign({}, props))));
 });
-exports.createMedux = createMedux;
+exports.createMegaWrex = createMegaWrex;
 // 返回已绑定上下文的方法
-const withMedux = (options) => {
+const withMegaWrex = (options) => {
     const { context = react_1.default.createContext({}) } = options || {};
     const _connect = (mapStateToProps, mapDispatchToProps, mapLoadingToProps, options) => connect(mapStateToProps, mapDispatchToProps, mapLoadingToProps, Object.assign(Object.assign({}, options), { context }));
-    const _createMedux = (reducers, initialState, init, options) => createMedux(reducers, initialState, init, Object.assign(Object.assign({}, options), { context }));
-    const _useMeduxContext = () => (0, MeduxContext_1.useMeduxContext)(context);
+    const _createMegaWrex = (reducers, initialState, init, options) => createMegaWrex(reducers, initialState, init, Object.assign(Object.assign({}, options), { context }));
+    const _useWrexContext = () => (0, WrexContext_1.useWrexContext)(context);
     return {
         connect: _connect,
         context,
-        createMedux: _createMedux,
-        useMeduxContext: _useMeduxContext,
+        createMegaWrex: _createMegaWrex,
+        useWrexContext: _useWrexContext,
     };
 };
-exports.withMedux = withMedux;
-exports.default = Medux;
+exports.withMegaWrex = withMegaWrex;
+exports.default = MegaWrex;

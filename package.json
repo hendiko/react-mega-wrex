@@ -1,7 +1,7 @@
 {
-  "name": "react-medux",
+  "name": "react-mega-wrex",
   "version": "1.0.0",
-  "description": "Multiple stores in React function component.",
+  "description": "A store powered by react useReducer hook.",
   "main": "dist/index.jsx",
   "module": "src/index.jsx",
   "files": [
@@ -16,20 +16,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hendiko/react-medux.git"
+    "url": "git+https://github.com/hendiko/react-mega-wrex.git"
   },
   "keywords": [
     "react",
     "hook",
     "redux",
-    "medux"
+    "hotwheels"
   ],
   "author": "Xavier Yin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hendiko/react-medux/issues"
+    "url": "https://github.com/hendiko/react-mega-wrex/issues"
   },
-  "homepage": "https://github.com/hendiko/react-medux#readme",
+  "homepage": "https://github.com/hendiko/react-mega-wrex#readme",
   "devDependencies": {
     "@types/lodash": "^4.14.177",
     "@types/react": "^17.0.36",

@@ -6,41 +6,41 @@
 import React, { Context, Reducer, ReducerState } from 'react';
 
 declare global {
-  declare namespace ReactMedux {
+  declare namespace ReactMegaWrex {
     /** Plain Object */
     type PO = { [key: string]: any };
 
-    type MeduxState = ReducerState<Reducer<PO, any>>;
+    type WrexState = ReducerState<Reducer<PO, any>>;
 
-    /** The type of payload prop in action passed into Medux reducer function */
-    type MeduxActionPayload = PO;
+    /** The type of payload prop in action passed into Wrex reducer function */
+    type WrexActionPayload = PO;
 
-    /** The type of action passed into Medux reducer function */
-    interface MeduxAction {
+    /** The type of action passed into Wrex reducer function */
+    interface WrexAction {
       type: string;
-      payload?: MeduxActionPayload;
+      payload?: WrexActionPayload;
       [key: string]: any;
     }
 
-    /** The path to get value from Medux store's state */
+    /** The path to get value from Wrex store's state */
     type NamePath = string | symbol | Array<string | number | symbol>;
 
-    type ActionHandler = (action: MeduxAction) => any;
+    type ActionHandler = (action: WrexAction) => any;
 
-    /** The boolean that represents the loading status of MeduxDispatch's static method's execution. */
-    type MeduxLoading = { [method: string]: boolean };
+    /** The boolean that represents the loading status of WrexDispatch's static method's execution. */
+    type WrexLoading = { [method: string]: boolean };
 
-    type MeduxReactReducer = Reducer<MeduxState, MeduxAction>;
+    type WrexReactReducer = Reducer<WrexState, WrexAction>;
 
     // The reducer function for loading
-    interface MeduxLoadingReducer {
+    interface WrexLoadingReducer {
       (
-        state: MeduxLoading,
+        state: WrexLoading,
         action: { type: string; name: string; count: number },
-      ): MeduxLoading;
+      ): WrexLoading;
     }
 
-    namespace MeduxDispatchMethods {
+    namespace WrexDispatchMethods {
       type GetState = (namePath: NamePath, defaultValue?: any) => any;
       type GetStates = (...namePaths: NamePath[]) => Array<any>;
 
@@ -50,46 +50,46 @@ declare global {
       }
     }
 
-    interface MeduxDispatch {
-      (action: string, payload: MeduxActionPayload): ReturnType<ActionHandler>;
+    interface WrexDispatch {
+      (action: string, payload: WrexActionPayload): ReturnType<ActionHandler>;
       (action: function, payload?: any, ...args): any;
       (action: Promise<any>): Promise<any>;
-      (action: MeduxAction): ReturnType<ActionHandler>;
+      (action: WrexAction): ReturnType<ActionHandler>;
 
-      getState: MeduxDispatchMethods.GetState;
+      getState: WrexDispatchMethods.GetState;
 
-      getStates: MeduxDispatchMethods.GetStates;
+      getStates: WrexDispatchMethods.GetStates;
 
-      setState: MeduxDispatchMethods.SetState;
+      setState: WrexDispatchMethods.SetState;
 
       // eslint-disable-next-line no-use-before-define
-      [key: string]: MeduxReducer;
+      [key: string]: WrexReducer;
     }
 
     // the props object that is passed into react component.
     type RCProps = { [name: string]: any };
 
-    // the function to help create props from Medux state, dispatch or loading.
+    // the function to help create props from Wrex state, dispatch or loading.
     type FuncToMapState = (
-      state: MeduxState | undefined,
+      state: WrexState | undefined,
       props: RCProps | undefined,
       {
         state,
         dispatch,
-      }: { state: MeduxState | undefined; dispatch: MeduxDispatch | undefined },
+      }: { state: WrexState | undefined; dispatch: WrexDispatch | undefined },
     ) => RCProps;
 
     type FuncToMapDispatch = (
-      dispatch: MeduxDispatch | undefined,
+      dispatch: WrexDispatch | undefined,
       props: RCProps | undefined,
       {
         state,
         dispatch,
-      }: { state: MeduxState | undefined; dispatch: MeduxDispatch | undefined },
+      }: { state: WrexState | undefined; dispatch: WrexDispatch | undefined },
     ) => RCProps;
 
     type FuncToMapLoading = (
-      loading: MeduxLoading | undefined,
+      loading: WrexLoading | undefined,
       props: RCProps | undefined,
     ) => RCProps;
 
@@ -109,17 +109,17 @@ declare global {
       (other: any): void;
     }
 
-    type OperationCall = (...args) => ReturnType<MeduxDispatch>;
-    type OperationClear = () => ReturnType<MeduxDispatch>;
-    type OperationMerge = (payload: MeduxActionPayload) => void;
+    type OperationCall = (...args) => ReturnType<WrexDispatch>;
+    type OperationClear = () => ReturnType<WrexDispatch>;
+    type OperationMerge = (payload: WrexActionPayload) => void;
     type OperationGet = (namePath: NamePath, defaultValue?: any) => any;
-    type OperationReset = (payload?: MeduxActionPayload) => void;
+    type OperationReset = (payload?: WrexActionPayload) => void;
     interface OperationSet {
-      (namePath: MeduxActionPayload): void;
+      (namePath: WrexActionPayload): void;
       (namePath: NamePath, value: any): void;
     }
 
-    interface MeduxActionOperations {
+    interface WrexActionOperations {
       // 在 reducer
       call: OperationCall;
       clear: OperationClear;
@@ -129,61 +129,57 @@ declare global {
       set: OperationSet;
     }
 
-    interface MeduxReducer extends Reducer {
+    interface WrexReducer extends Reducer {
       (
-        state?: MeduxState,
-        action?: MeduxAction,
-        operations?: MeduxActionOperations & { loading: MeduxLoading },
-      ): MeduxState | void;
+        state?: WrexState,
+        action?: WrexAction,
+        operations?: WrexActionOperations & { loading: WrexLoading },
+      ): WrexState | void;
     }
 
-    // Reducers for useMeduxStore hook
-    interface MeduxReducers {
-      [name: string]: MeduxReducer;
+    // Reducers for useWrexStore hook
+    interface WrexReducers {
+      [name: string]: WrexReducer;
     }
 
-    type MeduxReducerNames = Array<Extract<keyof MeduxReducers, string>>;
+    type WrexReducerNames = Array<Extract<keyof WrexReducers, string>>;
 
-    type MeduxReducerInitializer = (
-      arg: MeduxState,
-    ) => ReducerState<MeduxReactReducer>;
+    type WrexReducerInitializer = (
+      arg: WrexState,
+    ) => ReducerState<WrexReactReducer>;
 
-    /** The Medux store  */
-    interface MeduxStore {
-      dispatch: MeduxDispatch;
-      loading: MeduxLoading;
-      operations: MeduxActionOperations;
-      state: MeduxState;
+    /** The Wrex store  */
+    interface WrexStore {
+      dispatch: WrexDispatch;
+      loading: WrexLoading;
+      operations: WrexActionOperations;
+      state: WrexState;
     }
 
-    type MeduxContext = Context<Partial<MeduxStore>>;
+    type WrexContext = Context<Partial<WrexStore>>;
 
-    interface CreateMedux {
+    interface CreateMegaWrex {
       (
-        reducers?: MeduxReducers,
-        initialState?: MeduxState,
-        init?: MeduxReducerInitializer,
-        options?: { context?: MeduxContext },
+        reducers?: WrexReducers,
+        initialState?: WrexState,
+        init?: WrexReducerInitializer,
+        options?: { context?: WrexContext },
       ): (Comp: React.FC) => React.ReactNode;
     }
 
     type MapStateToProps = string | string[] | PO | FuncToMapState;
     type MapDispatchToProps = string | string[] | PO | FuncToMapDispatch;
-    type MapLoadingToProps =
-      | string
-      | string[]
-      | MeduxLoading
-      | FuncToMapLoading;
+    type MapLoadingToProps = string | string[] | WrexLoading | FuncToMapLoading;
 
     interface Connect {
       (
         mapStateToProps?: MapStateToProps,
         mapDispatchToProps?: MapDispatchToProps,
         mapLoadingToProps?: MapLoadingToProps,
-        options?: { context?: MeduxContext },
+        options?: { context?: WrexContext },
       ): (Comp: React.FC) => React.ReactNode;
     }
   }
 }
 
-export default ReactMedux;
+export default ReactMegaWrex;

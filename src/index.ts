@@ -2,16 +2,16 @@
  * @Author: Xavier Yin
  * @Date: 2021-11-24 09:19:15
  */
-import Medux, { connect, createMedux, withMedux } from './Medux';
-import MeduxContext, { useMeduxContext } from './MeduxContext';
-import useMeduxStore from './useMeduxStore';
+import MegaWrex, { connect, createMegaWrex, withMegaWrex } from './Wrex';
+import WrexContext, { useWrexContext } from './WrexContext';
+import useWrexStore from './useWrexStore';
 
 export {
-  Medux,
-  MeduxContext,
+  MegaWrex,
+  WrexContext,
   connect,
-  createMedux,
-  useMeduxContext,
-  useMeduxStore,
-  withMedux,
+  createMegaWrex,
+  useWrexContext,
+  useWrexStore,
+  withMegaWrex,
 };
